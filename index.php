@@ -13,7 +13,7 @@
 <body>
 
 <nav class="navbar fixed-top navbar-dark bg-primary">
-    <a class="navbar-brand" href="index.php">🐱 Bienvenue dans le mini-chat !</a>
+    <a class="navbar-brand" href="index.php">🐱 Bienvenue dans le mini-chat de la mort!</a>
 </nav>
 
 <main>
@@ -23,17 +23,7 @@
         <section class="row mb-5 my-5">
             <div class="col-12" id="messages">
                 <div class="col-12" id="messages-container">
-                    <div class="card mb-0 message">
-                        <div class="card-body">
-                            <p class="my-0">
-                                <strong>
-                                    ExemplePseudo
-                                </strong>
-                                : ExempleMessage
-                                <span class="badge badge-secondary float-right created_at">2018-01-01 00:00:00</span>
-                            </p>
-                        </div>
-                    </div>
+                    <?php include('includes/messages.php'); ?>
                 </div>
             </div>
         </section>
@@ -41,7 +31,7 @@
 </main>
 
 <div id="talkBar" class="bg-primary">
-    <form action="pdo/store.php" method="post">
+    <form onsubmit="storeMessage(event, this)" action="pdo/store.php" method="post">
         <div class="input-group">
             <input type="text"
                    id="pseudo"
@@ -49,7 +39,8 @@
                    name="pseudo"
                    placeholder="Pseudo"
                    minlength="2"
-                   required>
+                   required
+                   value="<?= $_COOKIE['pseudo'] ?? ' ' ?> ">
             <input type="text"
                    id="message"
                    class="form-control col-8"
@@ -58,7 +49,7 @@
                    minlength="1"
                    maxlength="255"
                    required>
-            <button type="submit" class="btn btn-success col-2">Envoyer</button>
+            <button type="submit" id="btnenvoi" class="btn btn-success col-2 envoie">Envoyer</button>
         </div>
     </form>
 </div>
